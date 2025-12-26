@@ -1,265 +1,379 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Font Styler</title>
+    <meta name="description" content="Transform your text into stunning unicode fancy fonts instantly — elegant, fast & beautiful!">
+    
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --primary-glow: rgba(99, 102, 241, 0.4);
+            --success: #10b981;
+            --text-dark: #111827;
+            --text-muted: #6b7280;
+            --bg-light: #f8fafc;
+            --card-bg: #ffffff;
+            --border: #e2e8f0;
+        }
 
-<title>Smart Font Styler</title>
-<meta name="description" content="Convert your text into beautiful unicode fancy fonts instantly.">
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: var(--bg-light);
+            color: var(--text-dark);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+        h1, h2, h3, .navbar-brand, .btn-glow {
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: bold;
+        }
 
-<style>
-:root {
---bg:#30d5c8;
---card:#ffffff;
---text:#212427;
---link:#027dff;
---muted:#666;
---success:#10b981;
-}
+        .navbar {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(226, 232, 240, 0.6);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+        }
 
-@media (prefers-color-scheme:dark) {
-:root {
---bg:#1a2a2a;
---card:#2d3d3d;
---text:#e0e0e0;
---link:#60a5fa;
---success:#34d399;
-}
-}
+        .navbar-brand {
+            font-weight: 900;
+            color: var(--primary-dark) !important;
+            letter-spacing: -0.5px;
+        }
 
-* {
-box-sizing:border-box;
-}
+        .nav-link {
+            color: var(--text-dark) !important;
+            font-weight: 500;
+        }
 
-body {
-margin:0;
-font-family:'Inter',sans-serif;
-background:var(--bg);
-color:var(--text);
-min-height:100vh;
-padding:2rem 1rem;
-}
+        .nav-link:hover {
+            color: var(--primary) !important;
+        }
 
-.main-container {
-max-width:960px;
-margin:0 auto;
-background:var(--card);
-border-radius:1rem;
-box-shadow:0 8px 30px rgba(0,0,0,0.15);
-overflow:hidden;
-}
+        .hero-section {
+            padding: 9rem 0 7rem;
+            text-align: center;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+        }
 
-.container {
-padding:2rem;
-text-align:center;
-}
+        .hero-title {
+            font-size: 4.2rem;
+            font-weight: 900;
+            background: linear-gradient(to right, #4f46e5, #7c3aed, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1.2rem;
+        }
 
-h1 {
-font-size:3.2rem;
-font-weight:800;
-margin-bottom:1rem;
-letter-spacing:-1px;
-}
+        .lead-text {
+            font-size: 1.35rem;
+            max-width: 720px;
+            margin: 0 auto 2.5rem;
+            color: var(--text-muted);
+        }
 
-p {
-font-size:1.1rem;
-color:var(--muted);
-margin:1rem 0;
-}
+        .btn-glow {
+            background: linear-gradient(45deg, var(--primary), #8b5cf6);
+            border: none;
+            padding: 0.85rem 2.2rem;
+            font-size: 1.15rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px var(--primary-glow);
+        }
 
-.warning {
-background:rgba(255,193,7,0.15);
-border-left:5px solid #ffc107;
-padding:1rem;
-border-radius:8px;
-margin:1.5rem auto;
-max-width:700px;
-font-size:0.95rem;
-}
+        .btn-glow:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px var(--primary-glow);
+        }
 
-textarea {
-width:90%;
-max-width:800px;
-min-height:140px;
-margin:1.5rem auto;
-padding:1rem;
-font-size:1.1rem;
-border:2px solid #ddd;
-border-radius:10px;
-resize:vertical;
-background:rgba(255,255,255,0.7);
-font-family:monospace;
-}
+        .feature-section {
+            padding: 6rem 0;
+            background: var(--bg-light);
+        }
 
-.flex-container {
-display:flex;
-flex-wrap:wrap;
-justify-content:center;
-gap:2rem;
-margin:2rem 0;
-}
+        .feature-card {
+            background: var(--card-bg);
+            border: none;
+            border-radius: 16px;
+            padding: 2.2rem;
+            transition: all 0.35s ease;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            position: relative;
+            overflow: hidden;
+        }
 
-label {
-display:flex;
-flex-direction:column;
-font-weight:600;
-font-size:1rem;
-}
+        .feature-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.18);
+        }
 
-select {
-margin-top:0.6rem;
-padding:0.7rem;
-font-size:1rem;
-border-radius:8px;
-border:1px solid #ccc;
-min-width:220px;
-}
+        .feature-icon {
+            font-size: 3.5rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            transition: all 0.4s ease;
+        }
 
-.result-container {
-margin:2rem auto;
-max-width:800px;
-text-align:center;
-}
+        .feature-card:hover .feature-icon {
+            transform: scale(1.15) rotate(5deg);
+        }
 
-#output-text {
-font-size:2.2rem;
-padding:1.5rem;
-background:rgba(240,240,240,0.6);
-border-radius:12px;
-cursor:pointer;
-min-height:100px;
-word-break:break-all;
-transition:background .3s;
-}
+        .main-content {
+            padding: 4rem 0;
+        }
 
-#output-text:hover {
-background:rgba(240,240,240,0.9);
-}
+        .card {
+            border: none;
+            border-radius: 16px;
+            box-shadow: 0 10px 35px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
 
-details {
-margin:2rem auto;
-max-width:800px;
-}
+        .card-header {
+            background: linear-gradient(90deg, #f0f9ff, #e0f2fe);
+            color: var(--primary-dark);
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
 
-summary {
-font-size:1.3rem;
-font-weight:600;
-padding:1rem;
-background:rgba(0,0,0,0.05);
-border-radius:10px;
-cursor:pointer;
-}
+        textarea.form-control,
+        input.form-control,
+        select.form-select {
+            border-radius: 10px;
+            border: 1px solid #d1d5db;
+            padding: 0.75rem 1.1rem;
+            font-family: 'Courier New', Courier, monospace;
+            transition: all 0.25s ease;
+        }
 
-.font-item {
-padding:0.8rem 0;
-border-bottom:1px solid #eee;
-font-size:1.1rem;
-}
+        textarea.form-control:focus,
+        input.form-control:focus,
+        select.form-select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 0.25rem rgba(99, 102, 241, 0.15);
+        }
 
-.font-item:last-child {
-border-bottom:none;
-}
+        #output-text {
+            min-height: 140px;
+            font-size: 2.1rem;
+            line-height: 1.4;
+            padding: 1.8rem;
+            background: #f9fafb;
+            border-radius: 12px;
+            border: 2px dashed #cbd5e1;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            word-break: break-word;
+            font-family: Arial, Helvetica, sans-serif;
+        }
 
-footer {
-text-align:center;
-padding:2rem 0;
-color:var(--muted);
-font-size:0.95rem;
-}
+        #output-text:hover {
+            background: #f1f5f9;
+            border-color: var(--primary);
+            box-shadow: 0 0 20px rgba(99, 102, 241, 0.15);
+        }
 
-footer a {
-color:var(--link);
-text-decoration:none;
-}
+        .copy-toast {
+            position: fixed;
+            bottom: 2.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--success);
+            color: white;
+            padding: 1rem 2.2rem;
+            border-radius: 50px;
+            box-shadow: 0 12px 40px rgba(16, 185, 129, 0.35);
+            opacity: 0;
+            pointer-events: none;
+            z-index: 2000;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
 
-#copy-toast {
-position:fixed;
-bottom:2rem;
-left:50%;
-transform:translateX(-50%);
-background:var(--success);
-color:white;
-padding:0.8rem 1.8rem;
-border-radius:50px;
-box-shadow:0 8px 25px rgba(0,0,0,0.25);
-opacity:0;
-transition:all 0.4s ease;
-z-index:1000;
-font-weight:600;
-font-size:1rem;
-display:flex;
-align-items:center;
-gap:0.5rem;
-pointer-events:none;
-}
+        .copy-toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(-15px);
+        }
 
-#copy-toast.show {
-opacity:1;
-transform:translateX(-50%) translateY(-10px);
-}
-</style>
+        footer {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid var(--border);
+            padding: 3.5rem 0 2.5rem;
+            margin-top: 6rem;
+        }
+
+        .social-icons a {
+            font-size: 1.9rem;
+            margin: 0 16px;
+            color: var(--text-muted);
+            transition: all 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 5px;
+        }
+    </style>
 </head>
-
 <body>
 
-<div class="main-container">
-<div class="container">
-<h1 aria-label="Smart Font Styler">Smart Font Styler</h1>
-<p>A powerful tool to convert regular text into beautiful unicode fancy fonts.</p>
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container-fluid px-4">
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <i class="fas fa-font me-2"></i>
+                Smart Font Styler
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link" href="#main">Tool</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#all-fonts">All Fonts</a></li>
+                    <li class="nav-item"><a class="nav-link" href="https://t.me/ISmartCoder" target="_blank">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-<p id="accessibility-warning" class="warning">
-⚠ <b>Note:</b> Not all devices render unicode perfectly. Screen readers may also have issues.
-</p>
+    <section class="hero-section">
+        <div class="container">
+            <h1 class="hero-title">Smart Font Styler</h1>
+            <p class="lead-text">Instantly transform your ordinary text into beautiful, stylish unicode fonts — elegant, fast and completely free!</p>
+            <a href="#main" class="btn btn-glow text-white">Start Styling Now</a>
+        </div>
+    </section>
 
-<textarea id="input-text-area" rows="5" placeholder="Type something awesome!"></textarea>
+    <section class="feature-section">
+        <div class="container">
+            <h2 class="text-center mb-5 fw-bold" style="font-size: 3rem;">Why People Love It</h2>
+            <div class="row g-4 justify-content-center">
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card text-center">
+                        <i class="fas fa-magic feature-icon"></i>
+                        <h3>Instant Transformation</h3>
+                        <p class="text-muted">Real-time preview of dozens of fancy styles</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card text-center">
+                        <i class="fas fa-copy feature-icon"></i>
+                        <h3>One-Click Copy</h3>
+                        <p class="text-muted">Just click the result to copy to clipboard</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card text-center">
+                        <i class="fas fa-palette feature-icon"></i>
+                        <h3>Many Styles</h3>
+                        <p class="text-muted">From gothic to bubble to futuristic — all included</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<div class="flex-container">
-<label>
-Select Font Style
-<select id="font-select">
-<option value="-1">Normal Text</option>
-</select>
-</label>
+    <section class="main-content" id="main">
+        <div class="container">
+            <div class="card shadow-lg">
+                <div class="card-header text-center py-4">
+                    <h2 class="mb-0">Create Your Fancy Text</h2>
+                </div>
+                <div class="card-body p-5">
+                    <div class="mb-4">
+                        <label class="form-label fw-bold fs-5">Your Text</label>
+                        <textarea id="input-text-area" class="form-control" rows="5" 
+                                  placeholder="Type or paste your awesome text here..."></textarea>
+                    </div>
 
-<label>
-Text Transform
-<select id="font-style-select">
-<option value="normal" selected>None</option>
-<option value="upper">UPPERCASE</option>
-<option value="lower">lowercase</option>
-<option value="alternate">AlTeRnAtE</option>
-<option value="spaced">S p a c e d</option>
-<option value="reverse">esreveR</option>
-</select>
-</label>
-</div>
-</div>
+                    <div class="row g-4 mb-5">
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Font Style</label>
+                            <select id="font-select" class="form-select">
+                                <option value="-1">Normal Text</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Text Transform</label>
+                            <select id="font-style-select" class="form-select">
+                                <option value="normal" selected>None</option>
+                                <option value="upper">UPPERCASE</option>
+                                <option value="lower">lowercase</option>
+                                <option value="alternate">AlTeRnAtE</option>
+                                <option value="spaced">S p a c e d</option>
+                                <option value="reverse">esreveR</option>
+                            </select>
+                        </div>
+                    </div>
 
-<div class="result-container">
-<p id="output-text" title="Click to copy">Your styled text will appear here...</p>
-</div>
+                    <div class="text-center mb-4">
+                        <div id="output-text" title="Click to copy" class="user-select-all">
+                            Your styled text will appear here...
+                        </div>
+                    </div>
 
-<div class="container">
-<details>
-<summary id="view-all-conversions">View All Available Fonts</summary>
-<ul id="output-list"></ul>
-</details>
-</div>
+                    <div class="text-center">
+                        <details class="d-inline-block">
+                            <summary id="view-all-conversions" class="btn btn-outline-primary btn-lg px-5">
+                                View All Available Fonts
+                            </summary>
+                        </details>
+                    </div>
 
-<div class="container" style="text-align:center; font-size:0.9rem; color:#666; padding-bottom:2rem;">
-<p>Click the result text above to copy • Crafted with ❤ by <a href="https://t.me/ISmartCoder">@ISmartCoder</a></p>
-<p>Powered by your <code>Smart Programmers</code></p>
-</div>
-</div>
+                    <ul id="output-list" class="list-unstyled mt-5"></ul>
+                </div>
+            </div>
 
-<div id="copy-toast"><i class="fas fa-check-circle"></i> Copied!</div>
+            <div class="text-center mt-5 text-muted small">
+                <p>Note: Some unicode fonts may display differently on various devices</p>
+            </div>
+        </div>
+    </section>
 
-<script>
+    <footer class="text-center">
+        <div class="social-icons mb-4">
+            <a href="https://t.me/ISmartCoder" target="_blank" title="Telegram"><i class="fa-brands fa-telegram"></i></a>
+            <a href="#" target="_blank" title="Twitter/X"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="#" target="_blank" title="GitHub"><i class="fa-brands fa-github"></i></a>
+            <a href="#" target="_blank" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" target="_blank" title="Discord"><i class="fa-brands fa-discord"></i></a>
+            <a href="#" target="_blank" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+        <p class="mb-2">Crafted with <i class="fas fa-heart text-danger"></i> by 
+            <a href="https://t.me/ISmartCoder" class="text-decoration-none fw-bold"> @ISmartCoder</a>
+        </p>
+        <p class="small mb-0">Powered by Smart Programmers • © 2025</p>
+    </footer>
+
+    <!-- Toast -->
+    <div id="copy-toast" class="copy-toast">
+        <i class="fas fa-check-circle me-2"></i> Copied to clipboard!
+    </div>
+
+    <!-- JavaScript (same as before) -->
+    <script>
 String.prototype.unicodeAwareSplit=function(){let _arr=[];for(const _c of this.valueOf()){_arr.push(_c);}return _arr;};
-
 String.prototype.toAlternateCase=function(){let _arr=[];let _alternate=true;for(const _c of this.valueOf()){if(_alternate){_alternate=false;_arr.push(_c.toUpperCase());}else{_alternate=true;_arr.push(_c.toLowerCase());}}return _arr.join('');};
 
 class PseudoFont {
@@ -273,11 +387,7 @@ this.referenceUpper="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 this.referenceDigits="0123456789";
 this.experimental=false;
 }
-
-setExperimental(state){
-this.experimental=state;
-}
-
+setExperimental(state){this.experimental=state;}
 convert(rawText){
 let _converted="";
 for(const _char of rawText){
@@ -301,129 +411,97 @@ let selectedFont="";
 let selectedStyle="";
 let fonts=[];
 
-const e_inputTextArea=document.getElementById('input-text-area');
-const e_fontSelect=document.getElementById('font-select');
-const e_fontStyleSelect=document.getElementById('font-style-select');
-const e_viewAllConversions=document.getElementById('view-all-conversions');
-
-const e_outputText=document.getElementById('output-text');
-const e_outputList=document.getElementById('output-list');
-
-const e_accessibilityWarning=document.getElementById('accessibility-warning');
-const copyToast=document.getElementById('copy-toast');
+const e_input = document.getElementById('input-text-area');
+const e_fontSelect = document.getElementById('font-select');
+const e_styleSelect = document.getElementById('font-style-select');
+const e_viewAll = document.getElementById('view-all-conversions');
+const e_output = document.getElementById('output-text');
+const e_list = document.getElementById('output-list');
+const copyToast = document.getElementById('copy-toast');
 
 fetch("fonts.json")
-.then(response=>response.json())
-.then(_fontFiles=>{
-for(const _font of _fontFiles){
-let _newFont=new PseudoFont(
-_font['fontName'],
-_font['fontLower']||'abcdefghijklmnopqrstuvwxyz',
-_font['fontUpper']||'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
-_font['fontDigits']||'0123456789'
-);
-if(_font['experimentalFont']===true){
-_newFont.setExperimental(true);
-}
-fonts.push(_newFont);
-let _newFontOption=document.createElement('option');
-_newFontOption.value=_newFont.fontName;
-if(_newFont.experimental){
-_newFontOption.innerHTML=`${_newFont.fontName} [EXPERIMENTAL]`;
-}else{
-_newFontOption.innerHTML=`${_newFont.fontName} (${_newFont.convert(_newFont.fontName)})`;
-}
-e_fontSelect.appendChild(_newFontOption);
-}
-e_inputTextArea.disabled=false;
-e_viewAllConversions.innerText=`View All Fonts (${fonts.filter(x=>!x.experimental).length})`;
-e_fontSelect.selectedIndex=Math.floor(Math.random()*fonts.length);
-updateUserInput();
-updateFontInput();
-convertText();
+.then(r=>r.json())
+.then(data=>{
+    data.forEach(f => {
+        let font = new PseudoFont(
+            f.fontName,
+            f.fontLower||'abcdefghijklmnopqrstuvwxyz',
+            f.fontUpper||'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+            f.fontDigits||'0123456789'
+        );
+        if(f.experimentalFont) font.setExperimental(true);
+        fonts.push(font);
+
+        let opt = document.createElement('option');
+        opt.value = font.fontName;
+        opt.text = font.experimental 
+            ? `${font.fontName} [EXPERIMENTAL]` 
+            : `${font.fontName} (${font.convert(font.fontName)})`;
+        e_fontSelect.add(opt);
+    });
+
+    e_input.disabled = false;
+    e_viewAll.textContent = `View All Fonts (${fonts.filter(f=>!f.experimental).length})`;
+    e_fontSelect.selectedIndex = Math.floor(Math.random() * fonts.length) + 1;
+    updateInput();
+    updateFont();
+    convert();
 });
 
-e_inputTextArea.addEventListener('keyup',()=>{
-updateUserInput();
-convertTextAll();
+function updateInput(){
+    let val = e_input.value.trim();
+    userInput = val ? val : "The quick brown fox jumps over the lazy dog.";
+
+    switch(selectedStyle){
+        case "upper":    userInput = userInput.toUpperCase(); break;
+        case "lower":    userInput = userInput.toLowerCase(); break;
+        case "alternate": userInput = userInput.toAlternateCase(); break;
+        case "spaced":   userInput = userInput.split('').join(' '); break;
+        case "reverse":  userInput = userInput.split('').reverse().join(''); break;
+    }
+}
+
+function updateFont(){
+    selectedFont = fonts.find(f=>f.fontName === e_fontSelect.value);
+    selectedStyle = e_styleSelect.value;
+}
+
+function convert(){
+    e_output.innerHTML = selectedFont ? selectedFont.convert(userInput) : userInput;
+}
+
+function convertAllFonts(){
+    convert();
+    if(convertAll){
+        e_list.innerHTML = "";
+        fonts.forEach(f => {
+            if(!f.experimental){
+                let li = document.createElement('li');
+                li.className = "mb-3";
+                li.innerHTML = `<strong>${f.fontName}:</strong> ${f.convert(userInput)}`;
+                e_list.appendChild(li);
+            }
+        });
+    }
+}
+
+e_input.addEventListener('input', () => { updateInput(); convertAllFonts(); });
+e_fontSelect.addEventListener('change', () => { updateFont(); convert(); });
+e_styleSelect.addEventListener('change', () => { updateFont(); updateInput(); convert(); });
+e_viewAll.addEventListener('click', () => {
+    convertAll = !convertAll;
+    convertAllFonts();
 });
 
-e_fontSelect.addEventListener('change',()=>{
-updateFontInput();
-convertText();
+e_output.addEventListener('click', () => {
+    let text = e_output.innerText.trim();
+    if(!text) return;
+    navigator.clipboard.writeText(text);
+    copyToast.classList.add('show');
+    setTimeout(()=>copyToast.classList.remove('show'), 2400);
 });
+    </script>
 
-e_fontStyleSelect.addEventListener('change',()=>{
-updateFontInput();
-updateUserInput();
-convertText();
-});
-
-e_viewAllConversions.addEventListener('click',()=>{
-convertAll=!convertAll;
-convertTextAll();
-});
-
-e_accessibilityWarning.addEventListener('click',()=>{
-e_accessibilityWarning.style.display="none";
-},{'once':true});
-
-e_outputText.addEventListener('click',()=>{
-let text=e_outputText.innerText.trim();
-if(!text)return;
-navigator.clipboard.writeText(text);
-copyToast.classList.add('show');
-setTimeout(()=>{copyToast.classList.remove('show');},2000);
-});
-
-function updateUserInput(){
-let _userInput=e_inputTextArea.value;
-if(_userInput.trim()){
-userInput=_userInput;
-}else{
-userInput="The quick brown fox jumps over the lazy dog.";
-}
-switch(selectedStyle){
-case"upper":
-userInput=userInput.toUpperCase();
-break;
-case"lower":
-userInput=userInput.toLowerCase();
-break;
-case"alternate":
-userInput=userInput.toAlternateCase();
-break;
-case"spaced":
-userInput=userInput.split('').join(' ');
-break;
-case"reverse":
-userInput=userInput.split('').reverse().join('');
-break;
-}
-}
-
-function updateFontInput(){
-selectedFont=fonts.find(fnt=>fnt.fontName===e_fontSelect.value);
-selectedStyle=e_fontStyleSelect.value;
-}
-
-function convertText(){
-e_outputText.innerHTML=selectedFont?selectedFont.convert(userInput):userInput;
-}
-
-function convertTextAll(){
-convertText();
-if(convertAll){
-e_outputList.innerHTML="";
-for(const _font of fonts){
-if(!_font.experimental){
-let _li=document.createElement("li");
-_li.innerHTML=`<p><b class="unselectable">${_font.fontName}:</b> ${_font.convert(userInput)}</p>`;
-e_outputList.appendChild(_li);
-}
-}
-}
-}
-</script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

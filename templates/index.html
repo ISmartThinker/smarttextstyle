@@ -1,385 +1,536 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <title>Smart Font Styler</title>
-    <meta name="description" content="Transform your text into stunning unicode fancy fonts instantly — elegant, fast & beautiful!">
+    <meta name="description" content="Instantly transform your text into beautiful unicode fancy fonts — premium, fast & free!"/>
     
-    <!-- Bootstrap 5 -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
     
     <style>
         :root {
-            --primary: #6366f1;
-            --primary-dark: #4f46e5;
-            --primary-glow: rgba(99, 102, 241, 0.4);
-            --success: #10b981;
-            --text-dark: #111827;
-            --text-muted: #6b7280;
-            --bg-light: #f8fafc;
-            --card-bg: #ffffff;
-            --border: #e2e8f0;
+            --primary-color: #7c3aed;
+            --primary-hover: #5b21b6;
+            --accent-color: #00d4ff;
+            --accent-hover: #00a0c2;
+            --text-color: #1a1a1a;
+            --bg-color: #f8f9fa;
+            --card-bg: rgba(255, 255, 255, 0.94);
+            --glass-bg: rgba(255, 255, 255, 0.28);
+            --shadow: 0 10px 25px rgba(91, 33, 182, 0.12);
+            --shadow-lg: 0 20px 50px rgba(91, 33, 182, 0.22);
+            --gradient-1: linear-gradient(135deg, #7c3aed 0%, #00d4ff 100%);
+            --gradient-2: linear-gradient(135deg, #00d4ff 0%, #7c3aed 100%);
+            --gradient-3: linear-gradient(135deg, #a855f7 0%, #ec4899 100%);
         }
 
-        body {
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
             font-family: Arial, Helvetica, sans-serif;
-            background: var(--bg-light);
-            color: var(--text-dark);
+            background: linear-gradient(180deg, #f8f9fa, #e9ecef);
+            color: var(--text-color);
+            line-height: 1.6;
             overflow-x: hidden;
-            min-height: 100vh;
+            -webkit-overflow-scrolling: touch;
         }
 
-        h1, h2, h3, .navbar-brand, .btn-glow {
-            font-family: Arial, Helvetica, sans-serif;
-            font-weight: bold;
+        .container {
+            max-width: 1400px;
+            width: 100%;
+            padding-right: 15px;
+            padding-left: 15px;
+            margin-right: auto;
+            margin-left: auto;
         }
 
-        .navbar {
-            background: rgba(255, 255, 255, 0.92);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(226, 232, 240, 0.6);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-        }
-
-        .navbar-brand {
-            font-weight: 900;
-            color: var(--primary-dark) !important;
-            letter-spacing: -0.5px;
-        }
-
-        .nav-link {
-            color: var(--text-dark) !important;
-            font-weight: 500;
-        }
-
-        .nav-link:hover {
-            color: var(--primary) !important;
-        }
-
-        .hero-section {
-            padding: 9rem 0 7rem;
+        .hero {
+            background: linear-gradient(135deg, rgba(255,255,255,0.96), rgba(233,236,239,0.82));
+            padding: clamp(4rem, 8vw, 6rem) 1rem clamp(3rem, 6vw, 5rem);
             text-align: center;
-            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            backdrop-filter: blur(12px);
+            box-shadow: var(--shadow);
         }
 
-        .hero-title {
-            font-size: 4.2rem;
-            font-weight: 900;
-            background: linear-gradient(to right, #4f46e5, #7c3aed, #ec4899);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .developer-credit {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            font-size: clamp(1.1rem, 3vw, 1.3rem);
+            font-weight: 700;
             margin-bottom: 1.2rem;
         }
 
-        .lead-text {
-            font-size: 1.35rem;
+        .developer-credit img {
+            height: clamp(26px, 6vw, 34px);
+            border-radius: 6px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transition: all 0.4s ease;
+        }
+
+        .developer-credit:hover img {
+            transform: scale(1.15) rotate(5deg);
+        }
+
+        .hero h1 {
+            font-size: clamp(2.4rem, 7vw, 3.8rem);
+            font-weight: 900;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+        }
+
+        .hero .lead {
+            font-size: clamp(1.1rem, 3.5vw, 1.4rem);
+            color: #4b5563;
             max-width: 720px;
             margin: 0 auto 2.5rem;
-            color: var(--text-muted);
         }
 
-        .btn-glow {
-            background: linear-gradient(45deg, var(--primary), #8b5cf6);
-            border: none;
-            padding: 0.85rem 2.2rem;
-            font-size: 1.15rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 25px var(--primary-glow);
+        .btn-premium {
+            background: var(--primary-color);
+            color: white !important;
+            font-weight: 700;
+            padding: clamp(0.9rem, 2.5vw, 1.1rem) clamp(1.8rem, 5vw, 2.6rem);
+            border-radius: 12px;
+            font-size: clamp(1.05rem, 3vw, 1.2rem);
+            transition: all 0.35s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            box-shadow: var(--shadow);
+            text-decoration: none;
         }
 
-        .btn-glow:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 35px var(--primary-glow);
+        .btn-premium:hover {
+            background: var(--primary-hover);
+            transform: translateY(-4px);
+            box-shadow: 0 16px 40px rgba(91,33,182,0.35);
         }
 
-        .feature-section {
-            padding: 6rem 0;
-            background: var(--bg-light);
+        .features {
+            padding: clamp(3rem, 7vw, 5rem) 1rem;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .features h2 {
+            font-size: clamp(2.2rem, 6vw, 2.8rem);
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: clamp(2rem, 5vw, 3.5rem);
+            background: var(--gradient-3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .row.g-4 > .col-md-4 {
+            display: flex;
         }
 
         .feature-card {
             background: var(--card-bg);
-            border: none;
+            backdrop-filter: blur(14px);
+            padding: clamp(1.6rem, 3.5vw, 2.2rem);
             border-radius: 16px;
-            padding: 2.2rem;
-            transition: all 0.35s ease;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
-            position: relative;
-            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.4s ease;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid rgba(124,58,237,0.12);
         }
 
         .feature-card:hover {
-            transform: translateY(-12px);
-            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.18);
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+            border-color: rgba(124,58,237,0.5);
         }
 
         .feature-icon {
-            font-size: 3.5rem;
-            color: var(--primary);
-            margin-bottom: 1.5rem;
+            width: clamp(64px, 14vw, 80px);
+            height: clamp(64px, 14vw, 80px);
+            margin: 0 auto 1.6rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: clamp(2rem, 4.5vw, 2.3rem);
+            color: white;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
             transition: all 0.4s ease;
         }
 
         .feature-card:hover .feature-icon {
-            transform: scale(1.15) rotate(5deg);
+            transform: scale(1.1) rotate(8deg);
         }
 
-        .main-content {
-            padding: 4rem 0;
+        .feature-card:nth-child(1) .feature-icon { background: var(--gradient-1); }
+        .feature-card:nth-child(2) .feature-icon { background: var(--gradient-2); }
+        .feature-card:nth-child(3) .feature-icon { background: var(--gradient-3); }
+        .feature-card:nth-child(4) .feature-icon { background: linear-gradient(135deg, #10b981, #059669); }
+        .feature-card:nth-child(5) .feature-icon { background: linear-gradient(135deg, #f59e0b, #d97706); }
+        .feature-card:nth-child(6) .feature-icon { background: linear-gradient(135deg, #ef4444, #b91c1c); }
+
+        .main-tool {
+            max-width: 1100px;
+            margin: 0 auto clamp(4rem, 10vw, 6rem);
+            padding: 0 1rem;
         }
 
-        .card {
-            border: none;
-            border-radius: 16px;
-            box-shadow: 0 10px 35px rgba(0,0,0,0.1);
+        .tool-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(14px);
+            border-radius: 20px;
+            box-shadow: var(--shadow-lg);
             overflow: hidden;
+            border: 1px solid rgba(124,58,237,0.15);
         }
 
-        .card-header {
-            background: linear-gradient(90deg, #f0f9ff, #e0f2fe);
-            color: var(--primary-dark);
-            font-weight: bold;
-            font-size: 1.5rem;
+        .card-body {
+            padding: clamp(2.5rem, 6vw, 4rem);
         }
 
         textarea.form-control,
-        input.form-control,
         select.form-select {
-            border-radius: 10px;
-            border: 1px solid #d1d5db;
-            padding: 0.75rem 1.1rem;
-            font-family: 'Courier New', Courier, monospace;
-            transition: all 0.25s ease;
+            border: 2px solid #cbd5e1;
+            border-radius: 12px;
+            padding: clamp(1.1rem, 3vw, 1.2rem) clamp(1.3rem, 3.5vw, 1.6rem);
+            font-size: clamp(1.05rem, 3vw, 1.2rem);
+            min-height: clamp(140px, 35vw, 180px);
+            transition: all 0.3s ease;
         }
 
         textarea.form-control:focus,
-        input.form-control:focus,
         select.form-select:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 0.25rem rgba(99, 102, 241, 0.15);
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.35rem rgba(124,58,237,0.2);
         }
 
         #output-text {
-            min-height: 140px;
-            font-size: 2.1rem;
-            line-height: 1.4;
-            padding: 1.8rem;
-            background: #f9fafb;
-            border-radius: 12px;
-            border: 2px dashed #cbd5e1;
+            min-height: clamp(160px, 40vw, 220px);
+            font-size: clamp(2rem, 6vw, 2.8rem);
+            padding: clamp(1.8rem, 5vw, 2.4rem);
+            background: white;
+            border: 3px dashed #c4b5fd;
+            border-radius: 16px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
+            margin: 2.5rem 0;
             word-break: break-word;
-            font-family: Arial, Helvetica, sans-serif;
+            box-shadow: inset 0 4px 15px rgba(0,0,0,0.04);
         }
 
         #output-text:hover {
-            background: #f1f5f9;
-            border-color: var(--primary);
-            box-shadow: 0 0 20px rgba(99, 102, 241, 0.15);
+            border-color: var(--primary-color);
+            box-shadow: 0 16px 40px rgba(124,58,237,0.25);
+        }
+
+        .view-all-btn {
+            background: var(--primary-color);
+            color: white;
+            font-weight: 700;
+            padding: clamp(1rem, 3vw, 1.2rem) clamp(2.2rem, 6vw, 2.8rem);
+            border-radius: 12px;
+            font-size: clamp(1.1rem, 3.5vw, 1.25rem);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.9rem;
+            box-shadow: var(--shadow);
+            transition: all 0.35s ease;
+        }
+
+        .view-all-btn:hover {
+            background: var(--primary-hover);
+            transform: translateY(-4px);
+            box-shadow: 0 16px 40px rgba(91,33,182,0.4);
+        }
+
+        .view-all-btn i {
+            transition: transform 0.6s ease;
+        }
+
+        .view-all-btn:hover i {
+            transform: rotate(360deg);
         }
 
         .copy-toast {
             position: fixed;
-            bottom: 2.5rem;
+            bottom: clamp(2.5rem, 6vw, 3.5rem);
             left: 50%;
             transform: translateX(-50%);
-            background: var(--success);
+            background: var(--accent-color);
             color: white;
-            padding: 1rem 2.2rem;
-            border-radius: 50px;
-            box-shadow: 0 12px 40px rgba(16, 185, 129, 0.35);
+            padding: clamp(1.1rem, 3vw, 1.3rem) clamp(2.2rem, 6vw, 3.2rem);
+            border-radius: 60px;
+            box-shadow: var(--shadow-lg);
             opacity: 0;
             pointer-events: none;
+            transition: all 0.45s ease;
+            font-weight: 700;
+            font-size: clamp(1.05rem, 3vw, 1.25rem);
             z-index: 2000;
-            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            white-space: nowrap;
         }
 
         .copy-toast.show {
             opacity: 1;
-            transform: translateX(-50%) translateY(-15px);
+            transform: translateX(-50%) translateY(-20px);
         }
 
-        footer {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-top: 1px solid var(--border);
-            padding: 3.5rem 0 2.5rem;
-            margin-top: 6rem;
+        .promo-section {
+            background: var(--glass-bg);
+            backdrop-filter: blur(14px);
+            padding: clamp(3rem, 7vw, 4rem) 2rem;
+            border-radius: 20px;
+            margin: 0 1.5rem clamp(4rem, 10vw, 6rem);
+            max-width: 1200px;
+            text-align: center;
+            box-shadow: var(--shadow-lg);
+            border-left: 8px solid var(--accent-color);
         }
 
-        .social-icons a {
-            font-size: 1.9rem;
-            margin: 0 16px;
-            color: var(--text-muted);
-            transition: all 0.3s ease;
+        .promo-section .btn {
+            background: var(--accent-color);
+            color: white;
+            font-weight: 700;
+            padding: clamp(1rem, 3vw, 1.1rem) clamp(2rem, 5vw, 2.8rem);
+            border-radius: 12px;
+            transition: all 0.35s ease;
         }
 
-        .social-icons a:hover {
-            color: var(--primary);
+        .promo-section .btn:hover {
+            background: var(--accent-hover);
             transform: translateY(-5px);
         }
 
-        /* Scrollbar */
-        ::-webkit-scrollbar {
-            width: 10px;
+        footer {
+            background: var(--card-bg);
+            padding: clamp(4rem, 8vw, 5rem) 1rem clamp(3rem, 6vw, 4rem);
+            text-align: center;
+            border-top: 1px solid #e5e7eb;
         }
-        ::-webkit-scrollbar-track {
-            background: #f1f5f9;
+
+        .footer-social a {
+            font-size: clamp(1.8rem, 4vw, 2.4rem);
+            margin: 0 1.2rem;
+            transition: all 0.4s ease;
         }
-        ::-webkit-scrollbar-thumb {
-            background: var(--primary);
-            border-radius: 5px;
+
+        .footer-social .telegram { color: #0088cc; }
+        .footer-social .github { color: #24292e; }
+        .footer-social .youtube { color: #ff0000; }
+        .footer-social .python { color: #3776ab; }
+        .footer-social .instagram { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .footer-social .x { color: #000000; }
+        .footer-social .discord { color: #5865f2; }
+
+        .footer-social a:hover {
+            transform: translateY(-6px) scale(1.15);
+            filter: drop-shadow(0 6px 12px rgba(0,0,0,0.25));
+        }
+
+        .footer-text {
+            font-size: clamp(1.1rem, 3vw, 1.25rem);
+            font-weight: 500;
+            color: #444;
+            margin: 2.5rem 0 1.5rem;
+        }
+
+        .footer-text a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .footer-text a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 992px) {
+            .hero { padding-top: 4rem; padding-bottom: 3.5rem; }
+            .features { padding: 3.5rem 1rem; }
+            .main-tool { margin-bottom: 5rem; }
+        }
+
+        @media (max-width: 576px) {
+            .container { padding-right: 10px; padding-left: 10px; }
+            .btn-premium, .view-all-btn, .promo-section .btn {
+                width: 100%;
+                justify-content: center;
+                padding: 1rem;
+            }
+            .card-body { padding: 2rem 1.5rem; }
         }
     </style>
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-lg fixed-top">
-        <div class="container-fluid px-4">
-            <a class="navbar-brand d-flex align-items-center" href="#">
-                <i class="fas fa-font me-2"></i>
-                Smart Font Styler
+    <section class="hero">
+        <div class="container">
+            <div class="developer-credit">
+                <span><b>Developed by: Abir Arafat Chawdhury</b></span>
+                <img src="https://www.crossed-flag-pins.com/animated-flag-gif/gifs/Bangladesh_240-animated-flag-gifs.gif" alt="Bangladesh Flag">
+            </div>
+            <h1>Smart Font Styler</h1>
+            <p class="lead">Transform ordinary text into stunning unicode art instantly — elegant, modern & completely free</p>
+            <a href="#tool" class="btn btn-premium">
+                Start Creating Magic <i class="fas fa-wand-magic-sparkles ms-2"></i>
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto align-items-center">
-                    <li class="nav-item"><a class="nav-link" href="#main">Tool</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#all-fonts">All Fonts</a></li>
-                    <li class="nav-item"><a class="nav-link" href="https://t.me/ISmartCoder" target="_blank">Contact</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-    <section class="hero-section">
-        <div class="container">
-            <h1 class="hero-title">Smart Font Styler</h1>
-            <p class="lead-text">Instantly transform your ordinary text into beautiful, stylish unicode fonts — elegant, fast and completely free!</p>
-            <a href="#main" class="btn btn-glow text-white">Start Styling Now</a>
         </div>
     </section>
 
-    <section class="feature-section">
+    <section class="features">
         <div class="container">
-            <h2 class="text-center mb-5 fw-bold" style="font-size: 3rem;">Why People Love It</h2>
-            <div class="row g-4 justify-content-center">
-                <div class="col-lg-4 col-md-6">
+            <h2>Why Choose Smart Font Styler?</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
                     <div class="feature-card text-center">
-                        <i class="fas fa-magic feature-icon"></i>
-                        <h3>Instant Transformation</h3>
-                        <p class="text-muted">Real-time preview of dozens of fancy styles</p>
+                        <div class="feature-icon"><i class="fas fa-bolt"></i></div>
+                        <h3>Lightning Fast</h3>
+                        <p>Instant real-time preview — zero delay</p>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6">
+                <div class="col-md-4">
                     <div class="feature-card text-center">
-                        <i class="fas fa-copy feature-icon"></i>
+                        <div class="feature-icon"><i class="fas fa-copy"></i></div>
                         <h3>One-Click Copy</h3>
-                        <p class="text-muted">Just click the result to copy to clipboard</p>
+                        <p>Just click — instantly copied</p>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6">
+                <div class="col-md-4">
                     <div class="feature-card text-center">
-                        <i class="fas fa-palette feature-icon"></i>
-                        <h3>Many Styles</h3>
-                        <p class="text-muted">From gothic to bubble to futuristic — all included</p>
+                        <div class="feature-icon"><i class="fas fa-palette"></i></div>
+                        <h3>Premium Quality</h3>
+                        <p>Handpicked elegant unicode fonts</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card text-center">
+                        <div class="feature-icon"><i class="fas fa-mobile-alt"></i></div>
+                        <h3>Mobile Perfect</h3>
+                        <p>Beautiful on every device</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card text-center">
+                        <div class="feature-icon"><i class="fas fa-lock"></i></div>
+                        <h3>Privacy First</h3>
+                        <p>100% client-side — no tracking</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card text-center">
+                        <div class="feature-icon"><i class="fas fa-gift"></i></div>
+                        <h3>Completely Free</h3>
+                        <p>Unlimited use — no sign-up</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="main-content" id="main">
+    <section id="tool" class="main-tool">
+        <div class="tool-card">
+            <div class="card-body">
+                <div class="mb-5">
+                    <label class="form-label fw-bold fs-5">Your Text</label>
+                    <textarea id="input-text-area" class="form-control" rows="5" placeholder="Type or paste your text here..."></textarea>
+                </div>
+
+                <div class="row g-4 mb-5">
+                    <div class="col-md-6">
+                        <label class="form-label fw-bold">Select Font Style</label>
+                        <select id="font-select" class="form-select">
+                            <option value="-1">Normal Text</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label fw-bold">Text Transform</label>
+                        <select id="font-style-select" class="form-select">
+                            <option value="normal" selected>None</option>
+                            <option value="upper">UPPERCASE</option>
+                            <option value="lower">lowercase</option>
+                            <option value="alternate">AlTeRnAtE</option>
+                            <option value="spaced">S p a c e d</option>
+                            <option value="reverse">esreveR</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="text-center mb-5">
+                    <div id="output-text" title="Click to copy">
+                        Your beautiful styled text will appear here...
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <details class="d-inline-block">
+                        <summary id="view-all-conversions" class="btn view-all-btn">
+                            View All Available Styles
+                            <i class="fas fa-wand-magic-sparkles"></i>
+                        </summary>
+                    </details>
+                </div>
+
+                <ul id="output-list" class="list-unstyled mt-5"></ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="promo-section">
         <div class="container">
-            <div class="card shadow-lg">
-                <div class="card-header text-center py-4">
-                    <h2 class="mb-0">Create Your Fancy Text</h2>
-                </div>
-                <div class="card-body p-5">
-                    <div class="mb-4">
-                        <label class="form-label fw-bold fs-5">Your Text</label>
-                        <textarea id="input-text-area" class="form-control" rows="5" 
-                                  placeholder="Type or paste your awesome text here..."></textarea>
-                    </div>
-
-                    <div class="row g-4 mb-5">
-                        <div class="col-md-6">
-                            <label class="form-label fw-bold">Font Style</label>
-                            <select id="font-select" class="form-select">
-                                <option value="-1">Normal Text</option>
-                            </select>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label fw-bold">Text Transform</label>
-                            <select id="font-style-select" class="form-select">
-                                <option value="normal" selected>None</option>
-                                <option value="upper">UPPERCASE</option>
-                                <option value="lower">lowercase</option>
-                                <option value="alternate">AlTeRnAtE</option>
-                                <option value="spaced">S p a c e d</option>
-                                <option value="reverse">esreveR</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="text-center mb-4">
-                        <div id="output-text" title="Click to copy" class="user-select-all">
-                            Your styled text will appear here...
-                        </div>
-                    </div>
-
-                    <div class="text-center">
-                        <details class="d-inline-block">
-                            <summary id="view-all-conversions" class="btn btn-outline-primary btn-lg px-5">
-                                View All Available Fonts
-                            </summary>
-                        </details>
-                    </div>
-
-                    <ul id="output-list" class="list-unstyled mt-5"></ul>
-                </div>
-            </div>
-
-            <div class="text-center mt-5 text-muted small">
-                <p>Note: Some unicode fonts may display differently on various devices</p>
-            </div>
+            <h2>Need Custom Tools, Bots or APIs?</h2>
+            <p>Professional Telegram bots, web tools, automation scripts and custom APIs — built with passion.</p>
+            <a href="https://t.me/ISmartCoder" target="_blank" class="btn btn-lg btn-premium">
+                Contact Developer <i class="fas fa-paper-plane ms-2"></i>
+            </a>
         </div>
     </section>
 
-    <footer class="text-center">
-        <div class="social-icons mb-4">
-            <a href="https://t.me/ISmartCoder" target="_blank" title="Telegram"><i class="fa-brands fa-telegram"></i></a>
-            <a href="#" target="_blank" title="Twitter/X"><i class="fa-brands fa-x-twitter"></i></a>
-            <a href="#" target="_blank" title="GitHub"><i class="fa-brands fa-github"></i></a>
-            <a href="#" target="_blank" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
-            <a href="#" target="_blank" title="Discord"><i class="fa-brands fa-discord"></i></a>
-            <a href="#" target="_blank" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+    <footer>
+        <div class="container">
+            <div class="footer-social mb-5">
+                <a href="https://t.me/ISmartCoder" target="_blank" class="telegram" title="Telegram"><i class="fab fa-telegram"></i></a>
+                <a href="#" target="_blank" class="github" title="GitHub"><i class="fab fa-github"></i></a>
+                <a href="#" target="_blank" class="youtube" title="YouTube"><i class="fab fa-youtube"></i></a>
+                <a href="#" target="_blank" class="python" title="Python"><i class="fab fa-python"></i></a>
+                <a href="#" target="_blank" class="instagram" title="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" target="_blank" class="x" title="X/Twitter"><i class="fab fa-x-twitter"></i></a>
+                <a href="#" target="_blank" class="discord" title="Discord"><i class="fab fa-discord"></i></a>
+            </div>
+
+            <p class="footer-text">
+                Crafted with <strong>passion</strong> by 
+                <a href="https://t.me/AbirArafatChawdhury" target="_blank">Abir Arafat Chawdhury 🇧🇩</a> 
+                | Join our community: 
+                <a href="https://t.me/TheSmartDev" target="_blank">t.me/TheSmartDev</a>
+            </p>
+            <p class="text-muted mt-3">© December 26, 2025 • Smart Font Styler</p>
         </div>
-        <p class="mb-2">Crafted with <i class="fas fa-heart text-danger"></i> by 
-            <a href="https://t.me/ISmartCoder" class="text-decoration-none fw-bold"> @ISmartCoder</a>
-        </p>
-        <p class="small mb-0">Powered by Smart Programmers • © 2025</p>
     </footer>
 
-    <!-- Toast -->
+    <!-- Copy Toast -->
     <div id="copy-toast" class="copy-toast">
         <i class="fas fa-check-circle me-2"></i> Copied to clipboard!
     </div>
 
-    <!-- JavaScript (same as before) -->
     <script>
 String.prototype.unicodeAwareSplit=function(){let _arr=[];for(const _c of this.valueOf()){_arr.push(_c);}return _arr;};
 String.prototype.toAlternateCase=function(){let _arr=[];let _alternate=true;for(const _c of this.valueOf()){if(_alternate){_alternate=false;_arr.push(_c.toUpperCase());}else{_alternate=true;_arr.push(_c.toLowerCase());}}return _arr.join('');};
 
 class PseudoFont {
 constructor(fontName,fontLower,fontUpper,fontDigits){
-this.fontName=fontName;
-this.fontLower=Array.isArray(fontLower)?fontLower:fontLower.unicodeAwareSplit();
+this.fontName=fontName;this.fontLower=Array.isArray(fontLower)?fontLower:fontLower.unicodeAwareSplit();
 this.fontUpper=Array.isArray(fontUpper)?fontUpper:fontUpper.unicodeAwareSplit();
 this.fontDigits=Array.isArray(fontDigits)?fontDigits:fontDigits.unicodeAwareSplit();
 this.referenceLower="abcdefghijklmnopqrstuvwxyz";
@@ -391,15 +542,10 @@ setExperimental(state){this.experimental=state;}
 convert(rawText){
 let _converted="";
 for(const _char of rawText){
-if(this.referenceLower.includes(_char)){
-_converted+=this.fontLower[this.referenceLower.indexOf(_char)];
-}else if(this.referenceUpper.includes(_char)){
-_converted+=this.fontUpper[this.referenceUpper.indexOf(_char)];
-}else if(this.referenceDigits.includes(_char)){
-_converted+=this.fontDigits[this.referenceDigits.indexOf(_char)];
-}else{
-_converted+=_char;
-}
+if(this.referenceLower.includes(_char)){_converted+=this.fontLower[this.referenceLower.indexOf(_char)];}
+else if(this.referenceUpper.includes(_char)){_converted+=this.fontUpper[this.referenceUpper.indexOf(_char)];}
+else if(this.referenceDigits.includes(_char)){_converted+=this.fontDigits[this.referenceDigits.indexOf(_char)];}
+else{_converted+=_char;}
 }
 return _converted;
 }
@@ -411,97 +557,82 @@ let selectedFont="";
 let selectedStyle="";
 let fonts=[];
 
-const e_input = document.getElementById('input-text-area');
-const e_fontSelect = document.getElementById('font-select');
-const e_styleSelect = document.getElementById('font-style-select');
-const e_viewAll = document.getElementById('view-all-conversions');
-const e_output = document.getElementById('output-text');
-const e_list = document.getElementById('output-list');
-const copyToast = document.getElementById('copy-toast');
+const e_input=document.getElementById('input-text-area');
+const e_fontSelect=document.getElementById('font-select');
+const e_styleSelect=document.getElementById('font-style-select');
+const e_viewAll=document.getElementById('view-all-conversions');
+const e_output=document.getElementById('output-text');
+const e_list=document.getElementById('output-list');
+const copyToast=document.getElementById('copy-toast');
 
 fetch("fonts.json")
 .then(r=>r.json())
 .then(data=>{
-    data.forEach(f => {
-        let font = new PseudoFont(
-            f.fontName,
-            f.fontLower||'abcdefghijklmnopqrstuvwxyz',
-            f.fontUpper||'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
-            f.fontDigits||'0123456789'
-        );
-        if(f.experimentalFont) font.setExperimental(true);
+    data.forEach(f=>{
+        let font=new PseudoFont(f.fontName,f.fontLower||'abcdefghijklmnopqrstuvwxyz',f.fontUpper||'ABCDEFGHIJKLMNOPQRSTUVWXYZ',f.fontDigits||'0123456789');
+        if(f.experimentalFont)font.setExperimental(true);
         fonts.push(font);
-
-        let opt = document.createElement('option');
-        opt.value = font.fontName;
-        opt.text = font.experimental 
-            ? `${font.fontName} [EXPERIMENTAL]` 
-            : `${font.fontName} (${font.convert(font.fontName)})`;
+        let opt=document.createElement('option');
+        opt.value=font.fontName;
+        opt.text=font.experimental?`${font.fontName} [EXPERIMENTAL]`:`${font.fontName} (${font.convert(font.fontName)})`;
         e_fontSelect.add(opt);
     });
-
-    e_input.disabled = false;
-    e_viewAll.textContent = `View All Fonts (${fonts.filter(f=>!f.experimental).length})`;
-    e_fontSelect.selectedIndex = Math.floor(Math.random() * fonts.length) + 1;
-    updateInput();
-    updateFont();
-    convert();
+    e_input.disabled=false;
+    e_viewAll.textContent=`View All Available Styles (${fonts.filter(f=>!f.experimental).length})`;
+    e_fontSelect.selectedIndex=Math.floor(Math.random()*fonts.length)+1;
+    updateInput();updateFont();convert();
 });
 
 function updateInput(){
-    let val = e_input.value.trim();
-    userInput = val ? val : "The quick brown fox jumps over the lazy dog.";
-
+    let val=e_input.value.trim();
+    userInput=val?val:"The quick brown fox jumps over the lazy dog.";
     switch(selectedStyle){
-        case "upper":    userInput = userInput.toUpperCase(); break;
-        case "lower":    userInput = userInput.toLowerCase(); break;
-        case "alternate": userInput = userInput.toAlternateCase(); break;
-        case "spaced":   userInput = userInput.split('').join(' '); break;
-        case "reverse":  userInput = userInput.split('').reverse().join(''); break;
+        case"upper":userInput=userInput.toUpperCase();break;
+        case"lower":userInput=userInput.toLowerCase();break;
+        case"alternate":userInput=userInput.toAlternateCase();break;
+        case"spaced":userInput=userInput.split('').join(' ');break;
+        case"reverse":userInput=userInput.split('').reverse().join('');break;
     }
 }
 
 function updateFont(){
-    selectedFont = fonts.find(f=>f.fontName === e_fontSelect.value);
-    selectedStyle = e_styleSelect.value;
+    selectedFont=fonts.find(f=>f.fontName===e_fontSelect.value);
+    selectedStyle=e_styleSelect.value;
 }
 
 function convert(){
-    e_output.innerHTML = selectedFont ? selectedFont.convert(userInput) : userInput;
+    e_output.innerHTML=selectedFont?selectedFont.convert(userInput):userInput;
 }
 
 function convertAllFonts(){
     convert();
     if(convertAll){
-        e_list.innerHTML = "";
-        fonts.forEach(f => {
+        e_list.innerHTML="";
+        fonts.forEach(f=>{
             if(!f.experimental){
-                let li = document.createElement('li');
-                li.className = "mb-3";
-                li.innerHTML = `<strong>${f.fontName}:</strong> ${f.convert(userInput)}`;
+                let li=document.createElement('li');
+                li.className="mb-4 fs-5 border-bottom pb-3";
+                li.innerHTML=`<strong style="color:var(--primary-color)">${f.fontName}:</strong> ${f.convert(userInput)}`;
                 e_list.appendChild(li);
             }
         });
     }
 }
 
-e_input.addEventListener('input', () => { updateInput(); convertAllFonts(); });
-e_fontSelect.addEventListener('change', () => { updateFont(); convert(); });
-e_styleSelect.addEventListener('change', () => { updateFont(); updateInput(); convert(); });
-e_viewAll.addEventListener('click', () => {
-    convertAll = !convertAll;
-    convertAllFonts();
-});
+e_input.addEventListener('input',()=>{updateInput();convertAllFonts();});
+e_fontSelect.addEventListener('change',()=>{updateFont();convert();});
+e_styleSelect.addEventListener('change',()=>{updateFont();updateInput();convert();});
+e_viewAll.addEventListener('click',()=>{convertAll=!convertAll;convertAllFonts();});
 
-e_output.addEventListener('click', () => {
-    let text = e_output.innerText.trim();
-    if(!text) return;
+e_output.addEventListener('click',()=>{
+    let text=e_output.innerText.trim();
+    if(!text)return;
     navigator.clipboard.writeText(text);
     copyToast.classList.add('show');
-    setTimeout(()=>copyToast.classList.remove('show'), 2400);
+    setTimeout(()=>copyToast.classList.remove('show'),2800);
 });
     </script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
